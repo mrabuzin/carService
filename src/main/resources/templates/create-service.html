@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create service</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+<div class="container col-sm-3 mt-5 text-center">
+    <form action="/service/create" method="post" th:object="${service}">
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="serviceDate" > Service date:  </label>
+            <input type="text" id="serviceDate" th:field="*{serviceDate}"/>
+            <p th:if="${#fields.hasErrors('serviceDate')}" th:errors="*{serviceDate}">Incorrect service date</p>
+
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="serviceTime" >Service time:</label>
+            <Input type = "text" id="serviceTime" th:field="*{serviceTime}"/>
+            <p th:if="${#fields.hasErrors('serviceTime')}" th:errors="*{serviceTime}">Incorrect service time</p>
+
+        </div>
+
+      
+        <button class="mb-5 mt-3 btn btn-lg btn-dark " type="submit"> Submit</button>
+    </form>
+
+
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+</div>
+</body>
+</html>

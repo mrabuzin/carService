@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create car</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+<div class="container col-sm-3 mt-5 text-center">
+    <form action="/car/create" method="post" th:object="${car}">
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="registrationTable" > Registration:  </label>
+            <input type="text" id="registrationTable" th:field="*{registrationTable}"/>
+            <p th:if="${#fields.hasErrors('registrationTable')}" th:errors="*{registrationTable}">Incorrect registration table</p>
+
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="color" >Color:</label>
+            <Input type = "text" id="color" th:field="*{color}"/>
+            <p th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Incorrect description</p>
+
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="productionYear" >Year:</label>
+            <Input type = "text" id="productionYear" th:field="*{productionYear}"/>
+            <p th:if="${#fields.hasErrors('productionYear')}" th:errors="*{productionYear}">Incorrect production year</p>
+
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2 block">Type: </label>
+            <select th:field="*{carType}">
+                <option th:each="carType : ${carTypes}"
+                        th:value="${carType.name()}"
+                        th:text="${carType.getLabel()}">CarType</option>
+            </select>
+        </div>
+
+
+        <div class="row mt-3">
+            <label class="mr-2 block" for="asign" > Asign car: </label>
+            <select id="asign" th:field="*{client}">
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.firstName + ' ' + client.lastName}">Users
+                </option>
+            </select>
+        </div>
+
+        <button class="mb-5 mt-3 btn btn-lg btn-dark " type="submit"> Submit</button>
+    </form>
+
+
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+</div>
+</body>
+</html>

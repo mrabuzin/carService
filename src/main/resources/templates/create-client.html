@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+
+<div class="container col-sm-3 mt-5 text-center">
+<form action="/client/create" method="post" th:object="${client}">
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for="firstName" >First name: </label>
+        <input type="text" id="firstName" th:field="*{firstName}"/>
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</p>
+    </div>
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for="lastName">Last name: </label>
+        <input type="text" id="lastName" th:field="*{lastName}"/>
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</p>
+    </div>
+
+
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for ="street">Street: </label>
+        <input type="text" id="street" th:field="*{clientAdress.street}"/>
+        <p th:if="${#fields.hasErrors('clientAdress.street')}" th:errors="*{clientAdress.street}">Incorrect street</p>
+    </div>
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for ="streetNumber">Street number: </label>
+        <input type="text" id="streetNumber" th:field="*{clientAdress.streetNumber}"/>
+        <p th:if="${#fields.hasErrors('clientAdress.streetNumber')}" th:errors="*{clientAdress.streetNumber}">Incorrect street number</p>
+    </div>
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for ="postalCode">Postal code: </label>
+        <input type="text" id="postalCode" th:field="*{clientAdress.postalCode}"/>
+        <p th:if="${#fields.hasErrors('clientAdress.postalCode')}" th:errors="*{clientAdress.postalCode}">Incorrect postal code</p>
+    </div>
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for ="city">City: </label>
+        <input type="text" id="city" th:field="*{clientAdress.city}"/>
+        <p th:if="${#fields.hasErrors('clientAdress.city')}" th:errors="*{clientAdress.city}">Incorrect city</p>
+    </div>
+
+    <div class="row mt-3">
+        <label class="mr-2 bigblock" for ="country">Country: </label>
+        <input type="text" id="country" th:field="*{clientAdress.country}"/>
+        <p th:if="${#fields.hasErrors('clientAdress.country')}" th:errors="*{clientAdress.country}">Incorrect country</p>
+    </div>
+
+
+
+    <button class="mb-5 mt-3 btn btn-lg btn-dark "type="submit"> Submit</button>
+
+</form>
+
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+
+</div>
+
+</body>
+</html>

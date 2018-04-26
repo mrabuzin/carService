@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+
+<div class="container col-sm-5 mt-5 text-center">
+    <ul class = "list-unstyled">
+        <div class="row mt-3">
+            <li class="mt-2" th:each="car : ${cars}" >
+                <a th:href="@{'/client/info/' + ${car.id}}"><span class="bigblock" th:text="${car.registrationTable} + ' ' + ${car.color} + ' ' + ${car.client.firstName} + ' ' + ${car.client.lastName}">Car</span></a>
+                <a th:href="'/car/delete/' + ${car.id}"><button class="btn btn-danger" >Delete car</button></a>
+                <a th:href="@{'/car/edit/' + ${car.id}}"><button class="btn btn-warning" >Edit car</button></a>
+            </li>
+        </div>
+    </ul>
+
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+    <a href="/car/create" class="btn btn-lg btn-outline-warning mt-2">Create car</a>
+</div>
+
+
+</body>
+</html>
