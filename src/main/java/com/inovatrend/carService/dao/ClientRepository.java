@@ -10,11 +10,6 @@ import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    List<Service> findByCarId(Long id);
-
-
-    @Transactional
-    void deleteByCarId(Long id);
 
 }
 

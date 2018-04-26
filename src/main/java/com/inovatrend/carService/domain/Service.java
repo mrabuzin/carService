@@ -38,4 +38,8 @@ public class Service {
 
     @Column(name = "paid")
     private boolean paid;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    private Car car;
 }
