@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="container col-sm-3 mt-5 text-center">
+    <h1>Create car</h1>
     <form action="/car/create" method="post" th:object="${car}">
 
         <div class="row mt-3">
@@ -37,7 +38,7 @@
             <select th:field="*{carType}">
                 <option th:each="carType : ${carTypes}"
                         th:value="${carType.name()}"
-                        th:text="${carType.getLabel()}">CarType</option>
+                        th:text="${carType.getCarManufacturer() + ' ' + carType.getModel()}">CarType</option>
             </select>
         </div>
 
@@ -56,7 +57,8 @@
     </form>
 
 
-    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+    <a href="/car/list" class="btn btn-lg btn-outline-danger mt-2">List cars</a>
 </div>
 </body>
 </html>

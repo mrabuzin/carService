@@ -6,6 +6,7 @@ import com.inovatrend.carService.domain.CarType;
 import com.inovatrend.carService.domain.Client;
 import com.inovatrend.carService.service.CarManager;
 import com.inovatrend.carService.service.ClientManager;
+import com.inovatrend.carService.service.ServiceManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,18 +24,21 @@ public class CarController {
 
     private final CarManager carManager;
     private final ClientManager clientManager;
+    private final ServiceManager serviceManager;
 
-    public CarController(CarManager carManager, ClientManager clientManager) {
+    public CarController(CarManager carManager, ClientManager clientManager, ServiceManager serviceManager) {
         this.carManager = carManager;
         this.clientManager = clientManager;
+        this.serviceManager = serviceManager;
     }
 
     @RequestMapping(value = "/info/{carId}")
     public String carInfo(Model model, @PathVariable Long carId) {
 
         Optional<Car> car = carManager.getCar(carId);
-        model.addAttribute("car", car);
-
+        if(car.isPresent()) {
+            model.addAttribute("car", car.get());
+        }
         return "car-info";
     }
 
@@ -89,6 +93,7 @@ public class CarController {
 
     @GetMapping("/delete/{carId}")
     public String deleteCar(@PathVariable Long carId) {
+        serviceManager.deleteByCarId(carId);
         carManager.deleteCar(carId);
         return "redirect:/car/list";
     }

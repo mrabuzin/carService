@@ -5,27 +5,29 @@ import lombok.Getter;
 @Getter
 public enum CarType {
 
-    YUGO("Yugo"),
-    AUDI("Audi"),
-    TOYOTA("Toyota"),
-    RENAULT("Renault"),
-    BMW("BMW"),
-    CITROEN("Citroen"),
-    VOLKSWAGEN("VolksWagen"),
-    OPEL("Opel"),
-    PEUGEOT("Peugeot"),
-    KIA("Kia"),
-    FORD("Ford");
+    YUGO("Yugo", "45"),
+    AUDI("Audi", "A6"),
+    TOYOTA("Toyota", "Prius"),
+    RENAULT("Renault", "Megane"),
+    BMW("BMW", "X6"),
+    CITROEN("Citroen", "C4"),
+    VOLKSWAGEN("VolksWagen", "Golf 5"),
+    OPEL("Opel", "Astra"),
+    PEUGEOT("Peugeot", "308"),
+    KIA("Kia", "Pride"),
+    FORD("Ford", "Focus");
 
-    private String label;
+    private String carManufacturer;
+    private String model;
 
-    CarType(String carType) {
+    CarType(String carManufacturer, String model) {
 
-        this.label = carType;
-
+        this.carManufacturer = carManufacturer;
+        this.model = model;
     }
 
-    public String getLabel() {
-        return label;
+    @Override
+    public String toString() {
+        return  carManufacturer + ' ' + model;
     }
 }

@@ -4,6 +4,7 @@ package com.inovatrend.carService.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -36,4 +37,7 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+
+    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+    private List<Service> serviceList;
 }

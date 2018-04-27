@@ -10,10 +10,11 @@
 <body>
 
 <div class="container col-sm-5 mt-5 text-center">
+    <h1>Client list</h1>
     <ul class = "list-unstyled">
         <div class="row mt-3">
             <li class="mt-2" th:each="client : ${clients}" >
-                <a th:href="@{'/client/info/' + ${client.id}}"><span class="bigblock" th:text="${client.firstName} + ' ' + ${client.lastName} + ' ' + ${client.clientAdress.street}">Client</span></a>
+                <a th:href="@{'/client/info/' + ${client.id}}"><span class="bigblock" th:text="${client.firstName} + ' ' + ${client.lastName}">Client</span></a>
                 <a th:href="'/client/delete/' + ${client.id}"><button class="btn btn-danger" >Delete client</button></a>
                 <a th:href="@{'/client/edit/' + ${client.id}}"><button class="btn btn-warning" >Edit client</button></a>
             </li>
@@ -21,7 +22,7 @@
     </ul>
 
     <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
-    <a href="/client/create" class="btn btn-lg btn-outline-warning mt-2">Create client</a>
+    <a href="/client/create/" class="btn btn-lg btn-outline-warning mt-2">Create client</a>
 </div>
 
 

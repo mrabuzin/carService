@@ -1,7 +1,9 @@
 package com.inovatrend.carService.web;
 
 import com.inovatrend.carService.domain.Client;
+import com.inovatrend.carService.service.CarManager;
 import com.inovatrend.carService.service.ClientManager;
+import com.inovatrend.carService.service.ServiceManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +11,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +22,13 @@ public class ClientController {
 
 
     private final ClientManager clientManager;
+    private final CarManager carManager;
+    private final ServiceManager serviceManager;
 
-    public ClientController(ClientManager clientManager) {
+    public ClientController(ClientManager clientManager, CarManager carManager, ServiceManager serviceManager) {
         this.clientManager = clientManager;
+        this.carManager = carManager;
+        this.serviceManager = serviceManager;
     }
 
 
@@ -29,8 +36,9 @@ public class ClientController {
     public String clientInfo(Model model, @PathVariable Long clientId) {
 
         Optional<Client> client = clientManager.getClient(clientId);
-        model.addAttribute("client", client);
-
+        if(client.isPresent()) {
+            model.addAttribute("client", client.get());
+        }
         return "client-info";
     }
 
@@ -48,7 +56,7 @@ public class ClientController {
     @GetMapping("/create")
     public String createClient( Model model) {
 
-        Client client = new Client(null, "", "", null);
+        Client client = new Client(null,"", "", "", null, new ArrayList<>());
         model.addAttribute("client", client);
         return "create-client";
     }
@@ -74,6 +82,8 @@ public class ClientController {
 
     @GetMapping("/delete/{clientId}")
     public String deleteClient(@PathVariable Long clientId) {
+//        serviceManager.deleteByCarId();
+        carManager.deleteByClientId(clientId);
         clientManager.deleteClient(clientId);
         return "redirect:/client/list";
     }

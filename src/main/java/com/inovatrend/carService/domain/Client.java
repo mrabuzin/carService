@@ -22,6 +22,9 @@ public class Client {
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 
+    @Column(name = "oib")
+    private String oib;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -31,7 +34,7 @@ public class Client {
     @Embedded
     private ClientAdress clientAdress = new ClientAdress();
 
-//    @Column(name = "car_list")
-//    private List<Car> carList;
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private List<Car> carList;
 
 }

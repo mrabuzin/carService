@@ -9,50 +9,51 @@
 </head>
 <body>
 <div class="container col-sm-3 mt-5 text-center">
+    <h1>Create service</h1>
     <form action="/service/create" method="post" th:object="${service}">
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="serviceDate" > Service date:  </label>
+            <label class="mr-2" for="serviceDate" > Service date:  </label>
             <input type="text" id="serviceDate" th:field="*{serviceDate}"/>
             <p th:if="${#fields.hasErrors('serviceDate')}" th:errors="*{serviceDate}">Incorrect service date</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="serviceTime" >Service time:</label>
+            <label class="mr-2" for="serviceTime" >Service time:</label>
             <Input type = "text" id="serviceTime" th:field="*{serviceTime}"/>
             <p th:if="${#fields.hasErrors('serviceTime')}" th:errors="*{serviceTime}">Incorrect service time</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="workerFirstName" >Worker first name:</label>
+            <label class="mr-2" for="workerFirstName" >Worker first name:</label>
             <Input type = "text" id="workerFirstName" th:field="*{workerFirstName}"/>
             <p th:if="${#fields.hasErrors('workerFirstName')}" th:errors="*{workerFirstName}">Incorrect first name</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="workerLastName" >Worker last name:</label>
+            <label class="mr-2" for="workerLastName" >Worker last name:</label>
             <Input type = "text" id="workerLastName" th:field="*{workerLastName}"/>
             <p th:if="${#fields.hasErrors('workerFirstName')}" th:errors="*{workerLastName}">Incorrect last name</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="serviceDescription" >Service description:</label>
+            <label class="mr-2" for="serviceDescription" >Service description:</label>
             <Input type = "text" id="serviceDescription" th:field="*{serviceDescription}"/>
             <p th:if="${#fields.hasErrors('serviceDescription')}" th:errors="*{serviceDescription}">Incorrect description</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 bigblock" for="servicePrice" >Service price:</label>
+            <label class="mr-2" for="servicePrice" >Service price:</label>
             <Input type = "text" id="servicePrice" th:field="*{servicePrice}"/>
             <p th:if="${#fields.hasErrors('servicePrice')}" th:errors="*{servicePrice}">Incorrect price</p>
         </div>
 
         <div class="row mt-3">
-            <label class="mr-2 block" for="asign" > Asign service: </label>
+            <label class="mr-2" for="asign" > Asign service: </label>
             <select id="asign" th:field="*{car}">
                 <option th:each="car : ${cars}"
                         th:value="${car.id}"
-                        th:text="${car.carType + ' ' + car.registrationTable}">Cars
+                        th:text="${car.carType} + ' ' + ${car.registrationTable}">Cars
                 </option>
             </select>
         </div>
@@ -62,7 +63,8 @@
     </form>
 
 
-    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+    <a href="/service/list" class="btn btn-lg btn-outline-danger mt-2">List services</a><br/>
 </div>
 </body>
 </html>

@@ -10,7 +10,7 @@ public interface CarManager {
     Car save(Car car);
     List<Car> getAllCars();
     void deleteCar(long id);
-    List<Car> findByClientId(Long id);
+    List<Car> findByClientId(Long clientId);
     void deleteByClientId(Long id);
     Optional<Car> getCar(Long id);
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Service info</h1>
+<table>
+    <tr>
+        <td>Service Date: </td>
+        <td th:text="${service.serviceDate + ' ' + service.serviceTime}"/>
+    </tr>
+
+    <tr>
+        <td>Worker: </td>
+        <td th:text="${service.workerFirstName + ' ' + service.workerLastName}"/>
+    </tr>
+
+    <tr>
+        <td>Description: </td>
+        <td th:text="${service.serviceDescription}"/>
+    </tr>
+
+    <tr>
+        <td>Price: </td>
+        <td th:text="${service.servicePrice}"/>
+    </tr>
+
+    <tr>
+        <td>Car: </td>
+        <td th:text="${service.car.carType}"/>
+    </tr>
+
+    <tr>
+        <td>Registration: </td>
+        <td th:text="${service.car.registrationTable}"/>
+    </tr>
+
+</table>
+
+    <a href="/" class="btn btn-lg btn-outline-dark mt-2">Homepage</a><br/>
+    <a href="/service/create" class="btn btn-lg btn-outline-warning mt-2">Create service</a><br/>
+    <a href="/service/list" class="btn btn-lg btn-outline-danger mt-2">List services</a>
+
+</div>
+</body>
+</html>

@@ -33,8 +33,9 @@ public class ServiceController {
     public String serviceInfo(Model model, @PathVariable Long serviceId) {
 
         Optional<Service> service = serviceManager.getService(serviceId);
-        model.addAttribute("service", service);
-
+        if(service.isPresent()) {
+            model.addAttribute("service", service.get());
+        }
         return "service-info";
     }
 
@@ -56,7 +57,7 @@ public class ServiceController {
 
         model.addAttribute("cars" , allCars);
 
-        return "list-clients";
+        return "list-services";
     }
 
     @GetMapping("/create")
@@ -100,7 +101,7 @@ public class ServiceController {
         List<Car> allCars = carManager.getAllCars();
         model.addAttribute("cars" , allCars);
 
-        return "create-car";
+        return "create-service";
     }
 
     @ResponseBody

@@ -10,48 +10,53 @@
 <body>
 
 <div class="container col-sm-3 mt-5 text-center">
+    <h1>Create client</h1>
 <form action="/client/create" method="post" th:object="${client}">
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for="firstName" >First name: </label>
+        <label class="mr-2 block" for="firstName" >First name: </label>
         <input type="text" id="firstName" th:field="*{firstName}"/>
         <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</p>
     </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for="lastName">Last name: </label>
+        <label class="mr-2 block" for="lastName">Last name: </label>
         <input type="text" id="lastName" th:field="*{lastName}"/>
         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</p>
     </div>
 
-
+    <div class="row mt-3">
+        <label class="mr-2 block" for="oib">OIB: </label>
+        <input type="text" id="oib" th:field="*{oib}"/>
+        <p th:if="${#fields.hasErrors('oib')}" th:errors="*{oib}">Incorrect oib</p>
+    </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for ="street">Street: </label>
+        <label class="mr-2 block" for ="street">Street: </label>
         <input type="text" id="street" th:field="*{clientAdress.street}"/>
         <p th:if="${#fields.hasErrors('clientAdress.street')}" th:errors="*{clientAdress.street}">Incorrect street</p>
     </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for ="streetNumber">Street number: </label>
+        <label class="mr-2 block" for ="streetNumber">Street number: </label>
         <input type="text" id="streetNumber" th:field="*{clientAdress.streetNumber}"/>
         <p th:if="${#fields.hasErrors('clientAdress.streetNumber')}" th:errors="*{clientAdress.streetNumber}">Incorrect street number</p>
     </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for ="postalCode">Postal code: </label>
+        <label class="mr-2 block" for ="postalCode">Postal code: </label>
         <input type="text" id="postalCode" th:field="*{clientAdress.postalCode}"/>
         <p th:if="${#fields.hasErrors('clientAdress.postalCode')}" th:errors="*{clientAdress.postalCode}">Incorrect postal code</p>
     </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for ="city">City: </label>
+        <label class="mr-2 block" for ="city">City: </label>
         <input type="text" id="city" th:field="*{clientAdress.city}"/>
         <p th:if="${#fields.hasErrors('clientAdress.city')}" th:errors="*{clientAdress.city}">Incorrect city</p>
     </div>
 
     <div class="row mt-3">
-        <label class="mr-2 bigblock" for ="country">Country: </label>
+        <label class="mr-2 block" for ="country">Country: </label>
         <input type="text" id="country" th:field="*{clientAdress.country}"/>
         <p th:if="${#fields.hasErrors('clientAdress.country')}" th:errors="*{clientAdress.country}">Incorrect country</p>
     </div>
@@ -62,7 +67,8 @@
 
 </form>
 
-    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a>
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+    <a href="/client/list" class="btn btn-lg btn-outline-danger mt-2">List clients</a>
 
 </div>
 

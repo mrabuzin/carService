@@ -10,45 +10,54 @@
 
 </head>
 <body>
+<div class="container mt-5">
+    <h1>Client info</h1>
+<table>
+    <tr>
+        <td class="mr-2 bigblock">First name: </td>
+        <td th:text="${client.firstName}"/>
+    </tr>
 
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{firstName}"/>
+    <tr>
+        <td class="mr-2 bigblock">Last name: </td>
+        <td th:text="${client.lastName}"/>
+    </tr>
+
+    <tr>
+        <td class="mr-2 bigblock">OIB: </td>
+        <td th:text="${client.oib}"/>
+    </tr>
+
+    <tr>
+        <td class="mr-2 bigblock">Street: </td>
+        <td th:text="${client.clientAdress.street + ' ' + client.clientAdress.streetNumber}"/>
+    </tr>
+
+    <tr>
+        <td class="mr-2 bigblock">City: </td>
+        <td th:text="${client.clientAdress.postalCode + ' ' + client.clientAdress.city}"/>
+    </tr>
+
+    <tr>
+        <td class="mr-2 bigblock">Country: </td>
+        <td th:text="${client.clientAdress.country}"/>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <ul class="list-unstyled">
+                <li th:each="car : ${client.carList}" th:text="${car.carType} + ' ' + ${car.registrationTable }">Car type</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+
+    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+    <a href="/client/create" class="btn btn-lg btn-outline-warning mt-2">Create car</a><br/>
+    <a href="/client/list" class="btn btn-lg btn-outline-danger mt-2">List clients</a>
+
 </div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">Last name: </label>
-    <label th:field="*{lastName}"/>
-</div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{clientAdress.street}"/>
-</div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{clientAdress.streetNumber}"/>
-</div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{clientAdress.postalCode}"/>
-</div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{clientAdress.street}"/>
-</div>
-
-<div class="row mt-3">
-    <label class="mr-2 bigblock">First name: </label>
-    <label th:field="*{clientAdress.country}"/>
-</div>
-
-
-
-
 
 </body>
 </html>

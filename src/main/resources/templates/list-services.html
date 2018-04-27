@@ -10,31 +10,32 @@
 <body>
 
 <div class="container col-sm-5 mt-5 text-center">
-    <h1>List cars</h1>
+    <h1>Service list</h1>
+
     <ul class = "list-unstyled">
         <div class="row mt-3">
-            <li class="mt-2" th:each="car : ${cars}" >
-                <a th:href="@{'/car/info/' + ${car.id}}"><span class="bigblock" th:text="${car.registrationTable} + ' ' + ${car.carType}">Car</span></a>
-                <a th:href="'/car/delete/' + ${car.id}"><button class="btn btn-danger" >Delete car</button></a>
-                <a th:href="@{'/car/edit/' + ${car.id}}"><button class="btn btn-warning" >Edit car</button></a>
+            <li class="mt-2" th:each="service : ${services}" >
+                <a th:href="@{'/service/info/' + ${service.id}}"><span class="bigblock" th:text="${service.serviceDate} + ' ' + ${service.car.registrationTable} + ' ' + ${service.car.carType}">Car</span></a>
+                <a th:href="'/service/delete/' + ${service.id}"><button class="btn btn-danger" >Delete car</button></a>
+                <a th:href="@{'/service/edit/' + ${service.id}}"><button class="btn btn-warning" >Edit car</button></a>
             </li>
         </div>
     </ul>
-    <form>
-    Filter cars by clients:
-    <select name = "clientId">
+
+<form>
+    Filter services by cars:
+    <select name = "carId">
         <option value="">
             -
         </option>
-        <option th:each="client : ${clients}"
-                th:value="${client.id}"
-                th:selected="${client.id} == ${selectedClient}"
-                th:text="${client.firstName + ' ' + client.lastName}">Client
+        <option th:each="car: ${cars}"
+                th:value="${car.id}"
+                th:selected="${car.id} == ${selectedCar}"
+                th:text="${car.carType} + ' ' + ${car.registrationTable}">Client
         </option>
     </select>
     <button class="btn btn-sm btn-dark">Filter</button><br/><br/>
-    </form>
-
+</form>
     <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
     <a href="/car/create" class="btn btn-lg btn-outline-warning mt-2">Create car</a>
 </div>

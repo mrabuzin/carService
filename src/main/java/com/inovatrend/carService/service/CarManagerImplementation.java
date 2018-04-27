@@ -32,8 +32,8 @@ public class CarManagerImplementation implements CarManager {
     }
 
     @Override
-    public List<Car> findByClientId(Long id) {
-        return carRepository.findByClientId(id);
+    public List<Car> findByClientId(Long clientId) {
+        return carRepository.findByClientId(clientId);
     }
 
     @Override
