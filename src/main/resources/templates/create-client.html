@@ -6,9 +6,10 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
 </head>
 <body>
-
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
 <div class="container col-sm-3 mt-5 text-center">
     <h1>Create client</h1>
 <form action="/client/create" method="post" th:object="${client}">

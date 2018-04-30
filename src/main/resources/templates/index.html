@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+
 </head>
 <body>
-
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
 <div class="container col-sm-3 mt-5 text-center">
-    <h1 class="mb-4">Homepage</h1>
     <div class="row">
         <a href ="/client/create/" class="col btn btn-lg btn-outline-dark">Create client</a><br/>
         <a href = "/client/list" class="col btn btn-lg btn-outline-dark ml-2">View all clients</a><br/>
@@ -24,6 +26,5 @@
         <a href="/service/list" class="col btn btn-lg btn-outline-danger ml-2">View all services</a>
     </div>
 </div>
-
 </body>
 </html>
