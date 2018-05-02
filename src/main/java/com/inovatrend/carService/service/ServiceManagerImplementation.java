@@ -2,6 +2,8 @@ package com.inovatrend.carService.service;
 
 import com.inovatrend.carService.dao.ServiceRepository;
 import com.inovatrend.carService.domain.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +23,8 @@ public class ServiceManagerImplementation implements  ServiceManager{
     }
 
     @Override
-    public List<Service> getAllServices() {
-        return serviceRepository.findAll();
+    public Page<Service> getAllServices(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
     }
 
     @Override

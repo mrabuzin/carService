@@ -6,24 +6,108 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
-
+    <link rel="stylesheet" type="text/css" href="../css/service.css">
 </head>
 <body>
 <!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<div class="jumbotron jumbotron-fluid  text-danger bg-secondary">
+    <div class="container text-center custom-heading">
+        <h1 class="display-2 courgette">Welcome to the car service</h1>
+        <p class="lead courgette">We will fix your car in no time!</p>
+        <!--buttons -->
+        <div class="btn-group mt-4 " role="group" aria-label="Callout buttons">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#join">Join now!</button>
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#login">Log in!</button>
+        </div>
+    </div>
+</div>
+
 <div class="container col-sm-3 mt-5 text-center">
-    <div class="row">
-        <a href ="/client/create/" class="col btn btn-lg btn-outline-dark">Create client</a><br/>
-        <a href = "/client/list" class="col btn btn-lg btn-outline-dark ml-2">View all clients</a><br/>
-    </div>
 
-    <div class ="row mt-3">
-        <a href="/car/create" class="col btn btn-lg btn-outline-warning">Create car</a>
-        <a href="/car/list" class="col btn btn-lg btn-outline-warning ml-2">View all cars</a>
-    </div>
+        <h1 class="mt-5">Last ten services</h1>
 
-    <div class ="row mt-3">
-        <a href="/service/create" class="col btn btn-lg btn-outline-danger">Create service</a>
-        <a href="/service/list" class="col btn btn-lg btn-outline-danger ml-2">View all services</a>
+        <ul class = "list-unstyled">
+            <div class="row mt-3">
+                <li class="mt-2" th:each="service : ${services}" >
+                    <a th:href="@{'/service/info/' + ${service.id}}"><span class="bigblock" th:text="${service.serviceTime} + ' ' + ${service.car.registrationTable} + ' ' + ${service.car.carType}">Car</span></a>
+                </li>
+            </div>
+        </ul>
+</div>
+
+
+<!--/*/<th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+<!--=====================================
+     FORM MODAL JOIN
+    =====================================-->
+<div class="modal" id="join" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Join now!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address:</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password:</label>
+                        <input type="password" class="form-control" id="password1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Repeat Password:</label>
+                        <input type="password" class="form-control" id="password2" placeholder="Repeat Password">
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-lg">Join</button>
+                </form>
+            </div>
+
+            <!-- /modal body -->
+        </div>
+    </div>
+</div>
+
+<!--=====================================
+     FORM MODAL LOGIN
+    =====================================-->
+<div class="modal" id="login" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Login!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Modal body -->
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address:</label>
+                        <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password:</label>
+                        <input type="password" class="form-control" id="password3" placeholder="Password">
+                    </div>
+                    <div>
+                        <a class="forgot-password" href="#">Forgot email/password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-lg mt-4">Login</button>
+                </form>
+            </div>
+            <!--/Modal body -->
+        </div>
     </div>
 </div>
 </body>

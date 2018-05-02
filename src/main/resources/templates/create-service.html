@@ -15,18 +15,6 @@
     <form action="/service/create" method="post" th:object="${service}">
 
         <div class="row mt-3">
-            <label class="mr-2" for="serviceDate" > Service date:  </label>
-            <input type="text" id="serviceDate" th:field="*{serviceDate}"/>
-            <p th:if="${#fields.hasErrors('serviceDate')}" th:errors="*{serviceDate}">Incorrect service date</p>
-        </div>
-
-        <div class="row mt-3">
-            <label class="mr-2" for="serviceTime" >Service time:</label>
-            <Input type = "text" id="serviceTime" th:field="*{serviceTime}"/>
-            <p th:if="${#fields.hasErrors('serviceTime')}" th:errors="*{serviceTime}">Incorrect service time</p>
-        </div>
-
-        <div class="row mt-3">
             <label class="mr-2" for="workerFirstName" >Worker first name:</label>
             <Input type = "text" id="workerFirstName" th:field="*{workerFirstName}"/>
             <p th:if="${#fields.hasErrors('workerFirstName')}" th:errors="*{workerFirstName}">Incorrect first name</p>
@@ -48,6 +36,11 @@
             <label class="mr-2" for="servicePrice" >Service price:</label>
             <Input type = "text" id="servicePrice" th:field="*{servicePrice}"/>
             <p th:if="${#fields.hasErrors('servicePrice')}" th:errors="*{servicePrice}">Incorrect price</p>
+        </div>
+
+        <div class="row mt-3">
+            <label class="mr-2" for="paid" >Paid:</label>
+            <Input type = "checkbox" id="paid" th:field="*{paid}"/>
         </div>
 
         <div class="row mt-3">

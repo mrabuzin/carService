@@ -11,7 +11,6 @@ public interface CarManager {
     List<Car> getAllCars();
     void deleteCar(long id);
     List<Car> findByClientId(Long clientId);
-    void deleteByClientId(Long id);
     Optional<Car> getCar(Long id);
 
 }

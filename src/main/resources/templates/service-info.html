@@ -16,7 +16,7 @@
 <table>
     <tr>
         <td>Service Date: </td>
-        <td th:text="${service.serviceDate + ' ' + service.serviceTime}"/>
+        <td th:text="${service.serviceTime}"/>
     </tr>
 
     <tr>
@@ -44,9 +44,14 @@
         <td th:text="${service.car.registrationTable}"/>
     </tr>
 
+    <tr>
+        <td>Paid: </td>
+        <td th:text="${service.paid ? 'Yes' : 'No'}"/>
+    </tr>
+
 </table>
 
-    <a href="/" class="btn btn-lg btn-outline-dark mt-2">Homepage</a><br/>
+
     <a href="/service/create" class="btn btn-lg btn-outline-warning mt-2">Create service</a><br/>
     <a href="/service/list" class="btn btn-lg btn-outline-danger mt-2">List services</a>
 

@@ -1,0 +1,34 @@
+body {
+    background-color: #f7f7f7;
+
+}
+.close {
+    color: #fff;
+    opacity: 1;
+}
+
+.close:hover {
+    color: #fff;
+    opacity: .2;
+}
+
+.jumbotron {
+    background: url(../img/car-service.jpg);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.custom-heading {
+    padding-bottom:139px;
+}
+
+.courgette {
+    font-family: 'Courgette',cursive;
+    font-weight: bold;
+}
+
+.lead {
+    font-size: 50px;
+}
+

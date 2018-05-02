@@ -11,7 +11,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +56,7 @@ public class ClientController {
     @GetMapping("/create")
     public String createClient( Model model) {
 
-        Client client = new Client(null,"", "", "", null, new ArrayList<>());
+        Client client = new Client(null,"", "", "", null, new HashSet<>());
         model.addAttribute("client", client);
         return "create-client";
     }
@@ -76,14 +76,13 @@ public class ClientController {
             // save to DB
             Client savedClient = clientManager.save(client);
             model.addAttribute("client", savedClient);
-            return "redirect:/client/list";
+            return "redirect:/client/info";
         }
     }
 
     @GetMapping("/delete/{clientId}")
     public String deleteClient(@PathVariable Long clientId) {
-//        serviceManager.deleteByCarId();
-        carManager.deleteByClientId(clientId);
+
         clientManager.deleteClient(clientId);
         return "redirect:/client/list";
     }
@@ -91,11 +90,11 @@ public class ClientController {
     @GetMapping("/edit/{clientId}")
     public String editClient( Model model, @PathVariable Long clientId) {
         Optional<Client> client = clientManager.getClient(clientId);
+
         model.addAttribute("client", client);
         return "create-client";
 
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/rest/create", method = RequestMethod.POST)

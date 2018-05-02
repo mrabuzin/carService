@@ -5,6 +5,9 @@ import com.inovatrend.carService.domain.Car;
 import com.inovatrend.carService.domain.Service;
 import com.inovatrend.carService.service.CarManager;
 import com.inovatrend.carService.service.ServiceManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,7 +46,8 @@ public class ServiceController {
     public String listAllServices(Model model, @RequestParam(required = false) Long carId) {
 
         if (carId == null){
-            List<Service> allServices = serviceManager.getAllServices();
+            Page<Service> allServices = serviceManager.getAllServices(PageRequest.of(0,10000000, new Sort(Sort.Direction.DESC, "serviceTime")));
+
             model.addAttribute("services", allServices);
         }
         else {

@@ -16,9 +16,9 @@
     <ul class = "list-unstyled">
         <div class="row mt-3">
             <li class="mt-2" th:each="service : ${services}" >
-                <a th:href="@{'/service/info/' + ${service.id}}"><span class="bigblock" th:text="${service.serviceDate} + ' ' + ${service.car.registrationTable} + ' ' + ${service.car.carType}">Car</span></a>
-                <a th:href="'/service/delete/' + ${service.id}"><button class="btn btn-danger" >Delete car</button></a>
-                <a th:href="@{'/service/edit/' + ${service.id}}"><button class="btn btn-warning" >Edit car</button></a>
+                <a th:href="@{'/service/info/' + ${service.id}}"><span class="bigblock" th:text="${service.serviceTime} + ' ' + ${service.car.registrationTable} + ' ' + ${service.car.carType}">Car</span></a>
+                <a th:href="'/service/delete/' + ${service.id}"><button class="btn btn-danger" >Delete service</button></a>
+                <a th:href="@{'/service/edit/' + ${service.id}}"><button class="btn btn-warning" >Edit service</button></a>
             </li>
         </div>
     </ul>
@@ -38,7 +38,7 @@
     <button class="btn btn-sm btn-dark">Filter</button><br/><br/>
 </form>
     <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
-    <a href="/car/create" class="btn btn-lg btn-outline-warning mt-2">Create car</a>
+    <a href="/service/create" class="btn btn-lg btn-outline-warning mt-2">Create service</a>
 </div>
 
 

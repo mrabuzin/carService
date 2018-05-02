@@ -36,7 +36,9 @@
 
     <tr>
         <td>Owner: </td>
-        <td th:text="${car.client.firstName + ' ' + car.client.lastName}"></td>
+        <td>
+            <a th:text="${car.client.firstName + ' ' + car.client.lastName}" th:href="@{'/client/info/' + ${car.client.id}}">Click me</a>
+        </td>
     </tr>
 
 
@@ -44,7 +46,7 @@
     <tr>
         <td colspan="2">
             <ul class="list-unstyled">
-                <li th:each="service : ${car.serviceList}" th:text="${service.serviceDate + ' ' + service.serviceDescription }"> Car type
+                <li th:each="service : ${car.serviceList}" th:text="${service.serviceTime + ' ' + service.serviceDescription }"> Car type
                     <a th:href="@{'/service/info/' + ${service.id}}"><button class="btn btn-sm btn-outline-primary">Info</button></a>
                 </li>
             </ul>
@@ -52,7 +54,7 @@
     </tr>
 </table>
 
-    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
+
     <a href="/car/create" class="btn btn-lg btn-outline-warning mt-2">Create car</a><br/>
     <a href="/car/list" class="btn btn-lg btn-outline-danger mt-2">List cars</a>
 </div>

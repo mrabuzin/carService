@@ -4,7 +4,10 @@ package com.inovatrend.carService.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -39,5 +42,21 @@ public class Car {
     private Client client;
 
     @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
-    private List<Service> serviceList;
+    private Set<Service> serviceList = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return Objects.equals(registrationTable, car.registrationTable);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(registrationTable);
+    }
+
+
 }

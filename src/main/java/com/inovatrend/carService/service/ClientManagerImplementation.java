@@ -1,6 +1,7 @@
 package com.inovatrend.carService.service;
 
 import com.inovatrend.carService.dao.ClientRepository;
+import com.inovatrend.carService.domain.Car;
 import com.inovatrend.carService.domain.Client;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class ClientManagerImplementation implements ClientManager {
 
     private final ClientRepository clientRepository;
+    private final CarManager carManager;
 
-    public ClientManagerImplementation(ClientRepository clientRepository) {
+    public ClientManagerImplementation(ClientRepository clientRepository, CarManager carManager) {
         this.clientRepository = clientRepository;
+        this.carManager = carManager;
     }
 
     @Override
@@ -35,6 +38,10 @@ public class ClientManagerImplementation implements ClientManager {
 
     @Override
     public void deleteClient(Long id) {
+        List<Car> clientCars =  carManager.findByClientId(id);
+        for (Car clientCar : clientCars) {
+            carManager.deleteCar(clientCar.getId());
+        }
         clientRepository.deleteById(id);
     }
 }

@@ -3,6 +3,8 @@ package com.inovatrend.carService.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -18,11 +20,8 @@ public class Service {
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 
-    @Column(name = "service_date")
-    private String serviceDate;
-
     @Column(name = "service_time")
-    private String serviceTime;
+    private Date serviceTime = new Date();
 
     @Column(name = "worker_first_name")
     private String workerFirstName;
@@ -42,4 +41,19 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Service service = (Service) o;
+        return Objects.equals(serviceTime, service.serviceTime) &&
+                Objects.equals(car, service.car);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(serviceTime, car);
+    }
 }

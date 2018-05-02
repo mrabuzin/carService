@@ -3,7 +3,8 @@ package com.inovatrend.carService.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Setter
@@ -35,6 +36,6 @@ public class Client {
     private ClientAdress clientAdress = new ClientAdress();
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private List<Car> carList;
+    private Set<Car> carList = new HashSet<>();
 
 }

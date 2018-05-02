@@ -11,9 +11,11 @@ import java.util.Optional;
 public class CarManagerImplementation implements CarManager {
 
     private final CarRepository carRepository;
+    private final  ServiceManager serviceManager;
 
-    public CarManagerImplementation(CarRepository carRepository) {
+    public CarManagerImplementation(CarRepository carRepository, ServiceManager serviceManager) {
         this.carRepository = carRepository;
+        this.serviceManager = serviceManager;
     }
 
     @Override
@@ -28,6 +30,8 @@ public class CarManagerImplementation implements CarManager {
 
     @Override
     public void deleteCar(long id) {
+
+        serviceManager.deleteByCarId(id);
         carRepository.deleteById(id);
     }
 
@@ -36,10 +40,7 @@ public class CarManagerImplementation implements CarManager {
         return carRepository.findByClientId(clientId);
     }
 
-    @Override
-    public void deleteByClientId(Long id) {
-        carRepository.deleteByClientId(id);
-    }
+
 
     @Override
     public Optional<Car> getCar(Long id) {
