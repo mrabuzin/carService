@@ -76,7 +76,7 @@ public class ClientController {
             // save to DB
             Client savedClient = clientManager.save(client);
             model.addAttribute("client", savedClient);
-            return "redirect:/client/info";
+            return "redirect:/client/info/" + client.getId();
         }
     }
 

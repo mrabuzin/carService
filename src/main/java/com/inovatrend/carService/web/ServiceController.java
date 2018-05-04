@@ -64,12 +64,15 @@ public class ServiceController {
         return "list-services";
     }
 
-    @GetMapping("/create")
-    public String showCreateServiceForm(Model model) {
+    @GetMapping("/create/{carId}")
+    public String showCreateServiceForm(Model model, @PathVariable Long carId) {
         Service service = new Service();
-        List<Car> allCars = carManager.getAllCars();
+        Optional<Car> car = carManager.getCar(carId);
         model.addAttribute("service", service);
-        model.addAttribute("cars" , allCars);
+        if(car.isPresent()) {
+            model.addAttribute("car", car.get());
+            service.setCar(car.get());
+        }
         return "create-service";
     }
 
@@ -87,14 +90,14 @@ public class ServiceController {
             // save to DB
             Service savedService = serviceManager.save(service);
             model.addAttribute("service", savedService);
-            return "redirect:/service/list";
+            return "redirect:/car/info/" + service.getCar().getId();
         }
     }
 
     @GetMapping("/delete/{serviceId}")
-    public String deleteService(@PathVariable Long serviceId) {
+    public String deleteService(@PathVariable Long serviceId, Service service) {
         serviceManager.deleteService(serviceId);
-        return "redirect:/service/list";
+        return "redirect:/car/info/" + service.getCar().getId();
     }
 
     @GetMapping("/edit/{serviceId}")

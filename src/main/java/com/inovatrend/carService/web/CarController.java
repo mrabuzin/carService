@@ -87,15 +87,15 @@ public class CarController {
             // save to DB
             Car savedCar = carManager.save(car);
             model.addAttribute("car", savedCar);
-            return "redirect:/car/list";
+            return "redirect:/client/info/" + car.getClient().getId();
         }
     }
 
     @GetMapping("/delete/{carId}")
-    public String deleteCar(@PathVariable Long carId) {
+    public String deleteCar(@PathVariable Long carId, Car car) {
         serviceManager.deleteByCarId(carId);
         carManager.deleteCar(carId);
-        return "redirect:/car/list";
+        return "redirect:/client/info/" + car.getClient().getId();
     }
 
     @GetMapping("/edit/{carId}")

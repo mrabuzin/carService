@@ -1,6 +1,9 @@
+
 body {
     background-color: #f7f7f7;
-
+}
+footer {
+    padding-top: 300px;
 }
 .close {
     color: #fff;

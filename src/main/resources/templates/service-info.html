@@ -36,12 +36,9 @@
 
     <tr>
         <td>Car: </td>
-        <td th:text="${service.car.carType}"/>
-    </tr>
-
-    <tr>
-        <td>Registration: </td>
-        <td th:text="${service.car.registrationTable}"/>
+        <td >
+            <a th:text="${service.car.carType} + ' ' + ${service.car.registrationTable}" th:href="@{'/car/info/' + ${service.car.id}}"></a>
+        </td>
     </tr>
 
     <tr>
@@ -51,10 +48,11 @@
 
 </table>
 
-
-    <a href="/service/create" class="btn btn-lg btn-outline-warning mt-2">Create service</a><br/>
-    <a href="/service/list" class="btn btn-lg btn-outline-danger mt-2">List services</a>
+    <a th:href="'/service/delete/' + ${service.id}"><button class="btn btn-lg btn-outline-danger mb-2" >Delete service</button></a> <br/>
+    <a th:href="@{'/service/edit/' + ${service.id}}"><button class="btn btn-lg btn-outline-warning" >Edit service</button></a>
 
 </div>
+
+
 </body>
 </html>

@@ -11,8 +11,12 @@
 <body>
 <!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
 <div class="container col-sm-3 mt-5 text-center">
-    <h1>Create service</h1>
+
     <form action="/service/create" method="post" th:object="${service}">
+
+        <h3>Create service for
+            <span th:text="${car.carType} + ' ' + ${car.registrationTable}"></span>
+        </h3>
 
         <div class="row mt-3">
             <label class="mr-2" for="workerFirstName" >Worker first name:</label>
@@ -43,23 +47,10 @@
             <Input type = "checkbox" id="paid" th:field="*{paid}"/>
         </div>
 
-        <div class="row mt-3">
-            <label class="mr-2" for="asign" > Asign service: </label>
-            <select id="asign" th:field="*{car}">
-                <option th:each="car : ${cars}"
-                        th:value="${car.id}"
-                        th:text="${car.carType} + ' ' + ${car.registrationTable}">Cars
-                </option>
-            </select>
-        </div>
-
-
         <button class="mb-5 mt-3 btn btn-lg btn-dark " type="submit">Submit</button>
     </form>
 
-
-    <a href="/" class="btn btn-lg btn-outline-dark">Homepage</a><br/>
-    <a href="/service/list" class="btn btn-lg btn-outline-danger mt-2">List services</a><br/>
 </div>
+
 </body>
 </html>
