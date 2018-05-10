@@ -1,46 +1,60 @@
 package com.inovatrend.carService.security;
 
+import com.inovatrend.carService.service.UserManagerImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+
+
+    @Autowired
+    private UserManagerImplementation userManagerImplementation;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/client/create").hasRole("ADMIN")
-                .antMatchers("/car/create").hasRole("ADMIN")
-                .antMatchers("/service/create").hasRole("ADMIN")
-                .antMatchers("/client/create/").hasRole("ADMIN")
-                .antMatchers("/car/create/").hasRole("ADMIN")
-                .antMatchers("/service/create/*").hasRole("ADMIN")
-                .antMatchers("/client/edit/*").hasRole("ADMIN")
-                .antMatchers("/car/edit/*").hasRole("ADMIN")
-                .antMatchers("/service/edit/*").hasRole("ADMIN")
-                .antMatchers("/client/delete/*").hasRole("ADMIN")
-                .antMatchers("/car/delete/*").hasRole("ADMIN")
-                .antMatchers("/service/delete/*").hasRole("ADMIN")
-                .antMatchers("/client/**").hasAnyRole("USER, ADMIN")
-                .antMatchers("/car/**").hasAnyRole("USER, ADMIN")
-                .antMatchers("/service/**").hasAnyRole("USER, ADMIN")
+                .antMatchers("/user/create").hasAuthority("CREATE_USER")
+                .antMatchers("/user/create/").hasAuthority("CREATE_USER")
+                .antMatchers("/user/edit/*").hasAuthority("CREATE_USER")
+                .antMatchers("/user/info/*").hasAuthority("CREATE_USER")
+                .antMatchers("/user/list").hasAuthority("LIST")
+                .antMatchers("/client/list").hasAuthority("LIST")
+                .antMatchers("/client/info").hasAuthority("LIST")
+                .antMatchers("/car/list").hasAuthority("LIST")
+                .antMatchers("/car/info").hasAuthority("LIST")
+                .antMatchers("/service/list").hasAuthority("LIST")
+                .antMatchers("/service/info").hasAuthority("LIST")
+                .antMatchers("/user/delete/*").hasAuthority("DELETE")
+                .antMatchers("/client/delete/*").hasAuthority("DELETE")
+                .antMatchers("/car/delete/*").hasAuthority("DELETE")
+                .antMatchers("/service/delete/*").hasAuthority("DELETE")
+                .antMatchers("/client/create/").hasAuthority("CREATE")
+                .antMatchers("/car/create/").hasAuthority("CREATE")
+                .antMatchers("/client/create").hasAuthority("CREATE")
+                .antMatchers("/car/create").hasAuthority("CREATE")
+                .antMatchers("/service/create/*").hasAuthority("CREATE")
+                .antMatchers("/client/edit/*").hasAuthority("CREATE")
+                .antMatchers("/car/edit/*").hasAuthority("CREATE")
+                .antMatchers("/service/edit/*").hasAuthority("CREATE")
                 .antMatchers("/**").permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/")
+        ;
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("pero").password("{noop}pero").roles("USER")
-                .and()
-                .withUser("matija").password("{noop}matija").roles("ADMIN")
-        ;
+        auth.userDetailsService(userManagerImplementation);
     }
 }

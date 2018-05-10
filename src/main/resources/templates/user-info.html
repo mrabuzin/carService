@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container mt-5">
+    <h1>User info</h1>
+    <table>
+        <tr>
+            <td>Username: </td>
+            <td th:text="${user.username}"/>
+        </tr>
+
+        <tr>
+            <td>Password: </td>
+            <td th:text="${user.password}"/>
+        </tr>
+
+        <!--<tr>-->
+            <!--<td>Description: </td>-->
+            <!--<td th:text="${service.serviceDescription}"/>-->
+        <!--</tr>-->
+
+    </table>
+
+    <a th:href="'/user/delete/' + ${user.id}"><button class="btn btn-lg btn-outline-danger mb-2" >Delete user</button></a> <br/>
+    <a th:href="@{'/user/edit/' + ${user.id}}"><button class="btn btn-lg btn-outline-warning" >Edit user</button></a>
+
+</div>
+
+
+</body>
+</html>

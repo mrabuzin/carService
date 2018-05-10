@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!--/*/<th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container col-sm-2 mt-5 text-center">
+    <h1>User list</h1>
+    <ul class = "list-unstyled">
+        <div class="row mt-3">
+            <li class="mt-2" th:each="user : ${users}" >
+                <a th:href="@{'/user/info/' + ${user.id}}"><span th:text="${user.username}">User</span></a>
+                <a th:href="'/user/delete/' + ${user.id}"><button class="btn btn-danger" >Delete user</button></a>
+                <a th:href="@{'/user/edit/' + ${user.id}}"><button class="btn btn-warning" >Edit user</button></a>
+            </li>
+        </div>
+    </ul>
+
+</div>
+
+
+</body>
+</html>

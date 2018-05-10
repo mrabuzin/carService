@@ -33,6 +33,16 @@
                     </div>
                 </li>
 
+                <li th:if="${#authentication.name == 'admin'}" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="/user/create">Create user</a>
+                        <a class="dropdown-item" href="/user/list">List all users</a>
+                    </div>
+                </li>
+
 
             </ul>
             <span class="text-white" th:if="${#authentication.name != 'anonymousUser'}">User is logged: <span  th:text="${#authentication.name}">Username</span> <a class="text-warning" href="/logout">Logout</a></span>

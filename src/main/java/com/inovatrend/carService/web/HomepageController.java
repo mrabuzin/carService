@@ -9,9 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +35,19 @@ public class HomepageController {
             model.addAttribute("cars" , allCars);
 
         return "index";
+
     }
+
+    @GetMapping(value = "/login")
+    public String login(Model model) {
+        return "login";
+    }
+
+    @PostMapping(value = "/login")
+    public String loginPage(Model model) {
+        return "login";
+    }
+
+
 
 }
