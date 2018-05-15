@@ -33,8 +33,17 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true, nullable = false)
     private String username ;
 
+    @NotNull
+    @Column(name = "email", unique = true, nullable = false)
+    private String email ;
+
     @Column(name = "password", nullable = false)
     private String password ;
+
+    private String confirmPassword;
+
+    @Column(name = "reset_token")
+    private String resetToken;
 
     @Column(name = "active")
     private boolean active = true;

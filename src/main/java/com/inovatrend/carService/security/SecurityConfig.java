@@ -2,18 +2,17 @@ package com.inovatrend.carService.security;
 
 import com.inovatrend.carService.service.UserManagerImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserManagerImplementation userManagerImplementation;
@@ -46,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/client/edit/*").hasAuthority("CREATE")
                 .antMatchers("/car/edit/*").hasAuthority("CREATE")
                 .antMatchers("/service/edit/*").hasAuthority("CREATE")
+                .antMatchers("/user/newPassword").permitAll()
+                .antMatchers("/user/newPassword/*").permitAll()
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
@@ -55,6 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userManagerImplementation);
+        auth.userDetailsService(userManagerImplementation).passwordEncoder(passwordEncoder);
     }
 }

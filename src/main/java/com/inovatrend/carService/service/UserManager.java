@@ -16,4 +16,7 @@ public interface UserManager extends UserDetailsService {
     void deleteUser(Long id);
     Optional<User> getUser(Long userId);
 
+    Optional<User> findByEmail(String email);
+
+    public Optional<User> findUserByResetToken(String resetToken);
 }

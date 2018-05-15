@@ -17,7 +17,9 @@
         <p class="lead courgette">We will fix your car in no time!</p>
         <!--buttons -->
         <div th:if="${#authentication.name == 'anonymousUser'}" class="btn-group mt-4 " role="group" aria-label="Callout buttons">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#join">Join now!</button>
+            <a href="/registration/register">
+            <button type="button" class="btn btn-primary btn-lg">Join now!</button>
+            </a>
             <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#login">Log in!</button>
         </div>
     </div>
@@ -50,9 +52,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--Modal body -->
+
             <!--<div class="modal-body">-->
                 <!--<form action="/" method="post" th:object="${user}">-->
+
+                    <!--<div class="form-group">-->
+                        <!--<label for="email-create">Email:</label>-->
+                        <!--<input type="email" class="form-control" id="email-create" placeholder="Enter username" th:field="*{email}">-->
+                        <!--<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</p>-->
+                    <!--</div>-->
+
                     <!--<div class="form-group">-->
                         <!--<label for="username-create">Username:</label>-->
                         <!--<input type="text" class="form-control" id="username-create" placeholder="Enter username" th:field="*{username}">-->
@@ -76,16 +85,11 @@
                         <!--</ul>-->
                     <!--</div>-->
 
+                    <!--<button type="submit" class="btn btn-dark btn-lg">Join</button>-->
+                <!--</form>-->
+            <!--</div>-->
 
-                    <!--<div class="form-group">-->
-                        <!--<label for="password2">Repeat Password:</label>-->
-                        <!--<input type="password" class="form-control" id="password2" placeholder="Repeat Password">-->
-                    <!--</div>-->
-                    <button type="submit" class="btn btn-dark btn-lg">Join</button>
-                </form>
-            </div>
 
-            <!-- /modal body -->
         </div>
     </div>
 </div>
@@ -93,7 +97,7 @@
 <!--=====================================
      FORM MODAL LOGIN
     =====================================-->
-<div class="modal" id="login" tabindex="-1" role="dialog">
+<div class="modal" id="login" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -115,7 +119,7 @@
                         <input type="password" class="form-control" id="password-login" name="password" placeholder="Password">
                     </div>
                     <div>
-                        <a href="#">Forgot username/password?</a>
+                        <a href="/user/whichUser">Forgot username/password?</a>
                     </div>
                     <button type="submit" class="btn btn-dark btn-lg mt-4" value="login">Login</button>
                 </form>

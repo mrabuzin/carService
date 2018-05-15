@@ -21,6 +21,7 @@ public class UserManagerImplementation implements UserManager {
 
     @Override
     public User save(User user) {
+
         return userRepository.save(user);
     }
 
@@ -48,4 +49,16 @@ public class UserManagerImplementation implements UserManager {
             throw new UsernameNotFoundException("User not found!");
         }
     }
+
+
+    @Override
+    public Optional findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional findUserByResetToken(String resetToken) {
+        return userRepository.findByResetToken(resetToken);
+    }
+
 }
