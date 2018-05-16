@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -46,7 +47,7 @@ public class User implements UserDetails {
     private String resetToken;
 
     @Column(name = "active")
-    private boolean active = true;
+    private boolean active = false;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

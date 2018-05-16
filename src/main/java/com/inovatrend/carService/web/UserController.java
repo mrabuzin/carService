@@ -2,9 +2,11 @@ package com.inovatrend.carService.web;
 
 import com.inovatrend.carService.domain.Permission;
 import com.inovatrend.carService.domain.User;
+import com.inovatrend.carService.service.EmailManager;
 import com.inovatrend.carService.service.UserManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,12 +27,12 @@ public class UserController {
 
 
     private final UserManager userManager;
-
-
+    private final EmailManager emailManager;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserManager userManager, PasswordEncoder passwordEncoder) {
+    public UserController(UserManager userManager, EmailManager emailManager, PasswordEncoder passwordEncoder) {
         this.userManager = userManager;
+        this.emailManager = emailManager;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -59,7 +60,7 @@ public class UserController {
 
         ArrayList<Permission> permissions = new ArrayList<>();
         User user = id != null ? userManager.getUser(id).get() :
-                new User(null, "", "","","","", true, permissions);
+                new User(null, "", "","","","", false, permissions);
         model.addAttribute("user", user);
         return "create-user";
     }
@@ -137,7 +138,18 @@ public class UserController {
 
             String appUrl= "http://localhost:9092/user/newPassword?token=" + user.getResetToken();
             model.addAttribute("appUrl", appUrl);
-            return "redirect:" + appUrl;
+
+
+            SimpleMailMessage registrationEmail = new SimpleMailMessage();
+            registrationEmail.setTo(user.getEmail());
+            registrationEmail.setSubject("Password change");
+            registrationEmail.setText("To change your password, please click the link below:\n"
+                    + appUrl);
+            registrationEmail.setFrom("smtp.gmail.com");
+
+            emailManager.sendEmail(registrationEmail);
+
+            return "which-user";
         }
 
 
@@ -160,7 +172,7 @@ public class UserController {
     }
 
     @PostMapping("/newPassword")
-    public String setNewPassword(@ModelAttribute User user, Model model, BindingResult result, @RequestParam Map<String, String> requestParams) {
+    public String setNewPassword(@ModelAttribute User user, Model model, BindingResult result) {
 
 
 
@@ -172,11 +184,15 @@ public class UserController {
             return "new-password";
         } else {
             // save to DB
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setResetToken(null);
-            User savedUser = userManager.save(user);
-            model.addAttribute("user", savedUser);
-            return "redirect:/";
+            if(user.getPassword().equals(user.getConfirmPassword())) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setResetToken(null);
+                User savedUser = userManager.save(user);
+                model.addAttribute("user", savedUser);
+                return "redirect:/";
+            } else {
+                return "new-password";
+            }
         }
     }
 

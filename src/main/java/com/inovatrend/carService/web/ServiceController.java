@@ -103,7 +103,9 @@ public class ServiceController {
     @GetMapping("/edit/{serviceId}")
     public String editService( Model model, @PathVariable Long serviceId) {
         Optional<Service> service = serviceManager.getService(serviceId);
+        Car car = service.get().getCar();
         model.addAttribute("service", service);
+        model.addAttribute("car", car);
 
         List<Car> allCars = carManager.getAllCars();
         model.addAttribute("cars" , allCars);
